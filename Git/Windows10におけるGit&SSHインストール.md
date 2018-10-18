@@ -5,7 +5,7 @@
 - [環境](#environment)
 - [概要](#outline)
 - [1. Git for Windowsのインストール及び設定](#gfw)
-- [2. SSHの鍵をIncludeを利用して管理してGitと連携する](#sshandgit)
+- [2. SSH鍵をIncludeを利用して管理しGitと連携する](#sshandgit)
 - [3. SourceTreeからPuTTYおよびOpenSSHを利用してホスティングサービスと連携する](#sourcetree)
 - [4. 複数のアカウントをGitホスティングサービスと連携する(OpenSSH)](#multiple)
 
@@ -69,7 +69,7 @@ SSHを利用したGitHubやBitbucket等Gitホスティングサービスへの�
     - 値：C:\Program Files\OpenSSH\ssh.exe  
         ※Win32 OpenSSHの場合は任意のインストール先を指定
 
-## <h2 id="sshandgit">2. SSHの鍵をIncludeを利用して管理してGitと連携する</h2>
+## <h2 id="sshandgit">2. SSH鍵をIncludeを利用して管理しGitと連携する</h2>
 
 - プロジェクト毎に鍵を管理するようにする。  
   参考  
@@ -110,6 +110,7 @@ SSHを利用したGitHubやBitbucket等Gitホスティングサービスへの�
 2. プロジェクト毎に鍵を生成する。
 
     1. 以下のようなコマンドを実行  
+        -Cと-fの内容は任意で修正。
         ```powershell
         ssh-keygen -t rsa -b 4096 -C "your_email@example.com" -f bitbucket/id_rsa
         ```

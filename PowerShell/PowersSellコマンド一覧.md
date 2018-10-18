@@ -119,7 +119,7 @@ Alias           ls -> Get-ChildItem
 
 ## <h2 id="winrm">CUIでのリモートアクセス(WinRM)</h2>
 
-PowerShellでWIndowsServerに対してリモートでアクセスする。
+PowerShellでWindowsServerに対してリモートでアクセスする。
 
 - アクセスできる権限はリモートデスクトップの場合と同様。
 - 詳細は以下を参照。  
@@ -168,7 +168,7 @@ cp –Path <FilePath> –Destination '<RemoteFilePath(Absolute)>' –ToSession (
 
 - Windows10 1803以上であれば標準インストール済み。  
  それ以外は以下からインストール。  
-`https://github.com/PowerShell/Win32-OpenSSH/releases`
+<https://github.com/PowerShell/Win32-OpenSSH/releases>
 
 - クライアント/サーバーへのインストール方法(Windows10以外)  
  ※PowerShell6(PS6)のインストールは不要。  
