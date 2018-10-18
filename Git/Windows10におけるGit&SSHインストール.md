@@ -115,7 +115,6 @@ SSHを利用したGitHubやBitbucket等Gitホスティングサービスへの�
         ```
 
     2. パスフレーズの入力を求められるので、入力  
-        ※VSCodeはパスフレーズに対応していない可能性大。パスフレーズ無しでそのままEnter。
         ```powershell
         Enter passphrase (empty for no passphrase): [Type a passphrase]
         # Enter same passphrase again: [Type passphrase again]
