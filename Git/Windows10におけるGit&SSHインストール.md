@@ -131,6 +131,7 @@ SSHを利用したGitHubやBitbucket等Gitホスティングサービスへの�
         User git
         IdentityFile C:\Users\{UserName}\.ssh\bitbucket\id_rsa
         IdentitiesOnly yes
+        AddKeysToAgent yes
     ```
 
     - 参考  
@@ -152,7 +153,7 @@ SSHを利用したGitHubやBitbucket等Gitホスティングサービスへの�
             User git
             IdentityFile C:\Users\{UserName}\.ssh\bitbucket\id_rsa
             IdentitiesOnly yes
-
+            AddKeysToAgent yes
         #GitHub
         Host github.com
             HostName github.com
@@ -160,6 +161,7 @@ SSHを利用したGitHubやBitbucket等Gitホスティングサービスへの�
             User git
             IdentityFile C:\Users\{UserName}\.ssh\github\id_rsa
             IdentitiesOnly yes
+            AddKeysToAgent yes
         ```
 
     2. Windowsサービス"ssh-agent"を再起動する。
@@ -219,6 +221,8 @@ SSHを利用したGitHubやBitbucket等Gitホスティングサービスへの�
     Port    22
     User    git
     IdentityFile    C:\Users\{UserName}\.ssh\bitbucket\id_rsa
+    IdentitiesOnly yes
+    AddKeysToAgent yes
 
     #個人用
     Host private.bitbucket.org
@@ -226,6 +230,8 @@ SSHを利用したGitHubやBitbucket等Gitホスティングサービスへの�
     Port    22
     User    git
     IdentityFile    C:\Users\{UserName}\.ssh\bitbucket\id_private_rsa
+    IdentitiesOnly yes
+    AddKeysToAgent yes
     ```
 
 2. 各リポジトリのリモート設定を".git/config"から書き換える(個人用の場合)。
