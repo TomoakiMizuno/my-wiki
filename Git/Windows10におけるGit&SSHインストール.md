@@ -2,16 +2,13 @@
 
 ## 目次
 
-1. [コマンドのヘルプを調べる](#help)
-2. [ファイルやフォルダーを操作する](#control)
-3. [ファイル検索(再帰的)](#find)
-4. [ファイル内検索(再帰的) find/grep](#grep)
-5. [特定のコマンドのエイリアスを調べる](#select)
-6. [エイリアスに割り当てられているコマンドを調べる](#gal)
-7. [CUIでのリモートアクセス(WinRM)](#winrm)
-8. [CUIでのリモートアクセス(SSH)](#ssh)
+- [環境](#environment)
+- [概要](#outline)
+- [1. Git for Windowsのインストール及び設定](#gfw)
+- [2. SSHの鍵をIncludeを利用して管理してGitと連携する](#sshandgit)
+- [3.SourceTreeからPuTTYおよびOpenSSHを利用してホスティングサービスと連携する](#sourcetree)
 
-## 環境
+## <h2 id="environment">環境</h2>
 
 - Windows 10 1803  
  ※標準でOpenSSHを実装したバージョン
@@ -22,7 +19,7 @@
 - SourceTree 3.0.6  
  [公式サイト](https://ja.atlassian.com/software/sourcetree)
 
-## 概要
+## <h2 id="outline">概要</h2>
 
 Windows 10でOpenSSHが標準実装されて間もない(2018年10月現在)ことで、  
 SSHを利用したGitHubやBitbucket等Gitホスティングサービスへの連携には様々な障害がある。
@@ -35,7 +32,7 @@ SSHを利用したGitHubやBitbucket等Gitホスティングサービスへの�
     上記ファイルの代わりに以下のファイルが設定ファイルとして利用される。  
     [Gitをインストールしたパス]/Git/etc/ssh/ssh_config
 
-1. SSHクライアントの問題  
+2. SSHクライアントの問題  
     Windows10 1803以前のWindowsではOpenSSHクライアントが存在しなかった。  
     そのため、代替手段としてPuTTYを利用することが多かった。  
 
@@ -52,37 +49,26 @@ SSHを利用したGitHubやBitbucket等Gitホスティングサービスへの�
  SSH接続時とSSHクライアントの問題の対応策を含めたインストール方法を以下に記述する。  
  なお、VSCode/SourceTreeのインストール設定については対象外とする。
 
-## <h2 id="help">1.Git for Windowsのインストール</h2>
+## <h2 id="gfw">1. Git for Windowsのインストール及び設定</h2>
 
 - Git for Windowsの入手とインストール  
- 下記リンク先を参照。  
- <https://qiita.com/elu_jaune/items/280b4773a3a66c7956fe>  
- ※標準エディタはVSCodeに設定
+    1. 下記リンク先を参照してインストール。  
+    <https://qiita.com/elu_jaune/items/280b4773a3a66c7956fe>  
+    ※標準エディタはVSCodeに設定
 
-## <h2 id="control">2.SSH設定ファイルを統一する</h2>
+    2. 環境変数を設定する  
+    本設定により、Windows10標準のOpenSSH及び設定ファイルが利用されるようになる。  
+     ※Windows 10 1803未満であれば、[Win32 OpenSSH](https://github.com/PowerShell/Win32-OpenSSH/wiki/Install-Win32-OpenSSH)を事前にインストールする。  
 
- SSHの設定は標準で"[ユーザーのホームフォルダ]/.ssh/config"が利用される。  
- しかし、Git for Windowsは"[Gitをインストールしたパス]/Git/etc/ssh/ssh_config"を利用する。  
- そこで、SSH標準のconfigをシンボリックリンクから利用できるようにする。  
+        コントロールパネル -> システムとセキュリティ -> システム -> システムの詳細設定  
+        -> 環境変数 -> 以下を追加  
 
- ※Windows 10 1803未満であれば、[Win32 OpenSSH](https://github.com/PowerShell/Win32-OpenSSH/wiki/Install-Win32-OpenSSH)を事前にインストールする。
-1. コマンドプロンプトを管理者権限で開く  
+  - システム環境変数
+    - 変数：GIT_SSH
+    - 値：C:\Program Files\OpenSSH\ssh.exe  
+        ※Win32 OpenSSHの場合は任意のインストール先を指定
 
-    ```cmd
-    mkdir C:\Program Files (x86)\Git\etc\ssh
-    ```
-
-2. シンボリックリンクを貼る
-
-    ```cmd
-    mklink C:\Program Files\Git\etc\ssh\ssh_config C:\Users\ユーザ名\.ssh\config
-    ```
-
-- 参考  
- [Git Bash on Windows で gitlab に ssh 接続するときにハマったこと](http://tassi-yuzukko.hatenablog.com/entry/2018/06/22/093801)  
- [windowsのgitのssh_configを設定する(cmder](https://qiita.com/fagai/items/5b74ef4cf6b497f54312#%E7%92%B0%E5%A2%83)  
-
-## <h2 id="control">3.SSHの鍵をIncludeを利用して管理してGitと連携する</h2>
+## <h2 id="sshandgit">2. SSHの鍵をIncludeを利用して管理してGitと連携する</h2>
 
 - プロジェクト毎に鍵を管理するようにする。  
   参考  
@@ -120,21 +106,21 @@ SSHを利用したGitHubやBitbucket等Gitホスティングサービスへの�
     ...
     ```
 
-1. プロジェクト毎に鍵を生成する。
+2. プロジェクト毎に鍵を生成する。
 
-    1. 以下のコマンドを実行  
+    1. 以下のようなコマンドを実行  
         ```powershell
         ssh-keygen -t rsa -b 4096 -C "your_email@example.com" -f bitbucket/id_rsa
         ```
 
-    1. パスフレーズの入力を求められるので、入力  
+    2. パスフレーズの入力を求められるので、入力  
         ※VSCodeはパスフレーズに対応していない可能性大。パスフレーズ無しでそのままEnter。
         ```powershell
         Enter passphrase (empty for no passphrase): [Type a passphrase]
         # Enter same passphrase again: [Type passphrase again]
         ```
 
-1. 各プロジェクト毎にconfigファイルを生成する。  
+3. 各プロジェクト毎にconfigファイルを生成する。  
 
     - Bitbucket設定例(bitbucket/config)  
     ```config
@@ -149,11 +135,11 @@ SSHを利用したGitHubやBitbucket等Gitホスティングサービスへの�
     - 参考  
     [お前らのSSH Keysの作り方は間違っている](https://qiita.com/suthio/items/2760e4cff0e185fe2db9)
 
-1. 公開鍵をGitホスティングサービスに登録する。  
+4. 公開鍵をGitホスティングサービスに登録する。  
     - 登録方法はリンク先を参考にする。  
  [[Windows] Visual Studio CodeでGithub・Gitlab・Bitbucketそれぞれにssh接続する](https://qiita.com/MegaBlackLabel/items/e825babfdc1b7fffec96)
 
-## <h2 id="control">4.SourceTreeからPuTTYおよびOpenSSHを利用してホスティングサービスと連携する</h2>
+## <h2 id="sourcetree">3.SourceTreeからPuTTYおよびOpenSSHを利用してホスティングサービスと連携する</h2>
 
 - SourceTreeでHTTPSを利用しない理由  
   - HTTPS接続の場合、SourceTree内で複数アカウントを利用すると、
@@ -171,16 +157,16 @@ SSHを利用したGitHubやBitbucket等Gitホスティングサービスへの�
 
     1. デフォルトでは鍵の保存時に"[ユーザーのホームフォルダ]/ssh"フォルダに保存される。
         ".ssh"ではない。  
-    1. OpenSSHとは鍵の互換性がない。  
+    2. OpenSSHとは鍵の互換性がない。  
         PuTTYで生成した鍵をOpenSSHでそのまま利用することは出来ない。  
         なお、PuTTYに鍵の相互変換機能がある模様。  
         しかし、同じ公開鍵を利用することに失敗したため、OpenSSHとは違う鍵を利用することを推奨。  
 
-1. OpenSSHを利用した連携方法  
+2. OpenSSHを利用した連携方法  
 
     1. SourceTreeを起動 -> ツール -> オプション -> SSH クライアント -> "OpenSSH"に変更。  
-    1. "SSH キー"にssh-keygenコマンドで生成した秘密鍵を登録する。  
+    2. "SSH キー"にssh-keygenコマンドで生成した秘密鍵を登録する。  
         例) ".ssh/bitbucket/id_rsa"等
-    1. Gitホスティングサービスに公開鍵を登録する。
+    3. Gitホスティングサービスに公開鍵を登録する。
         - 登録方法はリンク先を参考にする。  
  [[Windows] Visual Studio CodeでGithub・Gitlab・Bitbucketそれぞれにssh接続する](https://qiita.com/MegaBlackLabel/items/e825babfdc1b7fffec96)
