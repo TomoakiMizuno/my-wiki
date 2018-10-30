@@ -1,4 +1,4 @@
-# Windows10におけるGit&SHHインストール手順
+# Windows10におけるGit&SSHインストール手順
 
 ## 目次
 
