@@ -66,7 +66,7 @@ SSHを利用したGitHubやBitbucket等Gitホスティングサービスへの�
 
   - システム環境変数
     - 変数：GIT_SSH
-    - 値：C:\Program Files\OpenSSH\ssh.exe  
+    - 値：C:\Windows\System32\OpenSSH\ssh.exe  
         ※Win32 OpenSSHの場合は任意のインストール先を指定
 
 ## <h2 id="sshandgit">2. SSH鍵をIncludeを利用して管理しGitと連携する</h2>
