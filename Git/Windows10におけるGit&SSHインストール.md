@@ -183,9 +183,15 @@ SSHを利用したGitHubやBitbucket等Gitホスティングサービスへの�
 
 1. PuTTYを利用した連携方法  
  リンク先を参考に設定する。  
-[SourceTree 設定からSSH設定＆リポジトリをcloneするまでの流れ](https://qiita.com/github129/items/b23a24aaa359a0f8eba7)  
- ※以下の点に気を付ける。  
 
+    - PuTTYのインストール  
+        [Windows10にPuttyをインストールする方法](https://qiita.com/ponsuke0531/items/43491db4e8e8fed08651)  
+    - SSHキーの生成・設定  
+        [SourceTree 設定からSSH設定＆リポジトリをcloneするまでの流れ](https://qiita.com/github129/items/b23a24aaa359a0f8eba7)  
+    - PuTTYの追加設定  
+        [Pageantに秘密鍵をセットして自動起動する(Windows)](https://qiita.com/reflet/items/6d74851f033ddc325df9)  
+
+    ※設定時は以下の点に気を付ける。  
     1. デフォルトでは鍵の保存時に"[ユーザーのホームフォルダ]/ssh"フォルダに保存される。
         ".ssh"ではない。  
     2. OpenSSHとは鍵の互換性がない。  
@@ -194,7 +200,6 @@ SSHを利用したGitHubやBitbucket等Gitホスティングサービスへの�
         しかし、同じ公開鍵を利用することに失敗したため、OpenSSHとは違う鍵を利用することを推奨。  
 
 2. OpenSSHを利用した連携方法  
-
     1. SourceTreeを起動 -> ツール -> オプション -> SSH クライアント -> "OpenSSH"に変更。  
     2. "SSH キー"にssh-keygenコマンドで生成した秘密鍵を登録する。  
         例) ".ssh/bitbucket/id_rsa"等
@@ -211,7 +216,7 @@ SSHを利用したGitHubやBitbucket等Gitホスティングサービスへの�
     なお、SourceTreeを介してPuTTYを利用する場合は、下記のような複雑な手順は不要(名前/メールアドレスは変更不可)。
 
 1. .ssh/configを以下のように設定する  
-下記の例はBitbucketだが、GitHubも同じ手順で可能。  
+ 下記の例はBitbucketだが、GitHubも同じ手順で可能。  
 ※事前に複数の鍵を生成していることが前提。
 
     ```powershell
