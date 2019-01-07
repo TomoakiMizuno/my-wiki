@@ -11,16 +11,6 @@ Cmder標準のShellであるcmdでは日本語を完全に扱うことが不可�
 - [Cmderでオシャレにcmd.exeを使う -前編-](https://blog.mamansoft.net/2018/11/18/use-cmd-elegant-on-cmder-phase1/)
 - [Cmderでオシャレにcmd.exeを使う -後編-](https://blog.mamansoft.net/2018/11/26/use-cmd-elegant-on-cmder-phase2/)
 
-### 概要
-
-SSHでのアクセスを実現するには気を付ける点が複数存在する。  
-下記の手順通りに実施することで、躓くポイントを回避する。  
-特に以下の点に躓きやすい。  
-
-- 鍵の生成及び管理
-- 関連ファイル・ディレクトリの権限設定
-- ssh-agentの設定(パスフレーズの入力省略等)
-
 ### Cmderのインストール
 
 1. Cmderのインストール
