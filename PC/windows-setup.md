@@ -6,6 +6,7 @@
   - Visual Studio Code
   - EmEditor
   - Intellij IDEA（Jetbrains tool Box）
+  - [GVim](https://www.kaoriya.net/software/vim/)
 - プログラミング関連
   - Git for Windows
   - SourceTree または GitKraken
